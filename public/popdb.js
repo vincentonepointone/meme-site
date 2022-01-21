@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 //database
-mongoose.connect('mongodb://localhost/memes', {
+mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 });

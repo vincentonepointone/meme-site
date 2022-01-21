@@ -38,6 +38,7 @@ function getData() {
             <video controls preload="auto" loop="" playsinline src="${src}" alt="a meme" class="rounded" width="90%">
             <source src="${src}" type="video/mp4; codecs=&quot;av01.0.00M.08, opus&quot;">
             <source src="${src}" type="video/mp4">
+            <source src="${src}" type="video/webm">
             </video>
           </div> 
           `;

@@ -43,6 +43,7 @@ function getData() {
           video.setAttribute('loop', '');
           video.classList.add('rounded')
           video.src = src;
+          video.type="video/mp4"
           video.setAttribute('alt', 'a meme');
           video.setAttribute('width', '90%');
           // video.addEventListener('mouseover', play);

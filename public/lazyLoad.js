@@ -29,7 +29,7 @@ function getData() {
       document.querySelector('observertarget').remove();
       for(let i = 0; i < 5; i++) {
         // var postTemplate 
-          let src = `memes/${data[filenameCounter + i].fileName}`;
+          let src = `/memes/${data[filenameCounter + i].fileName}`;
           let div = document.createElement('div');
           div.classList.add('container');
           let h6 = document.createElement('h6');

@@ -41,6 +41,7 @@ function getData() {
           let video = document.createElement('video');
           video.setAttribute('controls', '');
           video.setAttribute('loop', '');
+        video.setAttribute('playsinline', '');
           video.classList.add('rounded')
           video.src = src;
           video.type="video/mp4"

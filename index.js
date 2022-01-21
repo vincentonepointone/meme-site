@@ -46,4 +46,4 @@ app.post('/upload', (req,res) => {
 	})
 })
 // Starting server
-app.listen(process.env.PORT , console.log("on the port of heroku my broku"));
+app.listen(process.env.PORT || 3000 , console.log("on the port of heroku my broku"));

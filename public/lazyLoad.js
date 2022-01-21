@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000/filenames";
+const URL = "/filenames";
 
 var filenameCounter = 0;
 

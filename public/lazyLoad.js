@@ -1,4 +1,4 @@
-const URL = "/filenames";
+const URL = "https://memeitboyz.herokuapp.com/filenames";
 
 var filenameCounter = 0;
 

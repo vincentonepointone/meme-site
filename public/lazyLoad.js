@@ -28,8 +28,22 @@ function getData() {
     .then(data => {
       document.querySelector('observertarget').remove();
       for(let i = 0; i < 5; i++) {
+
         // var postTemplate 
           let src = `/memes/${data[filenameCounter + i].fileName}`;
+          let videoTemplate = `
+        
+          <div class="container ">
+            <h6><img src="" alt="" width="20px">Funny </h6>
+            <h3>This is a cool meme</h3>
+            <video controls preload="auto" loop="" playsinline src="${src}" alt="a meme" class="rounded" style="width: 281.174px; height: 500px;" >
+            <source src="${src}" type="video/mp4; codecs=&quot;av01.0.00M.08, opus&quot;"><!----><!----><source src="${src}" type="video/mp4"><!---->
+            </video>
+          </div> 
+  
+          `
+         <video preload="auto" poster="https://img-9gag-fun.9cache.com/photo/avAorvM_460swp.webp" loop="" style="width: 281.174px; height: 500px;"><source src="https://img-9gag-fun.9cache.com/photo/avAorvM_460svav1.mp4" type="video/mp4; codecs=&quot;av01.0.00M.08, opus&quot;"><!----><!----><source src="https://img-9gag-fun.9cache.com/photo/avAorvM_460sv.mp4" type="video/mp4"><!----></video>
+
           let div = document.createElement('div');
           div.classList.add('container');
           let h6 = document.createElement('h6');
@@ -51,7 +65,7 @@ function getData() {
           // video.addEventListener('touchstart', playM)
           // video.addEventListener('mouseleave', pause);
           div.appendChild(video);
-          feed.appendChild(div)       
+          feed.innerHTML += videoTemplate;       
           if(i == 1){
           let observertarget = document.createElement('observertarget');
           observertarget.setAttribute('height','10px');

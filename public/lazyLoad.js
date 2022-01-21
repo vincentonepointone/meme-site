@@ -61,7 +61,7 @@ function getData() {
           // video.addEventListener('touchstart', playM)
           // video.addEventListener('mouseleave', pause);
           div.appendChild(video);
-          feed.appendChild(videoTemplate)       
+          feed.innerHTML += videoTemplate;       
           if(i == 1){
           let observertarget = document.createElement('observertarget');
           observertarget.setAttribute('height','10px');

@@ -42,7 +42,6 @@ function getData() {
           </div> 
   
           `
-         <video preload="auto" poster="https://img-9gag-fun.9cache.com/photo/avAorvM_460swp.webp" loop="" style="width: 281.174px; height: 500px;"><source src="https://img-9gag-fun.9cache.com/photo/avAorvM_460svav1.mp4" type="video/mp4; codecs=&quot;av01.0.00M.08, opus&quot;"><!----><!----><source src="https://img-9gag-fun.9cache.com/photo/avAorvM_460sv.mp4" type="video/mp4"><!----></video>
 
           let div = document.createElement('div');
           div.classList.add('container');

@@ -28,18 +28,8 @@ function getData() {
     .then(data => {
       document.querySelector('observertarget').remove();
       for(let i = 0; i < 5; i++) {
-
         // var postTemplate 
           let src = `/memes/${data[filenameCounter + i].fileName}`;
-          let videoTemplate = `
-        
-          <div class="container ">
-            <h6><img src="" alt="" width="20px">Funny </h6>
-            <h3>This is a cool meme</h3>
-            <video controls  loop playsinline src="${src}" alt="a meme"  width="90%" class="rounded" type="vidoe/mp4" ></video>
-          </div> 
-  
-          `
           let div = document.createElement('div');
           div.classList.add('container');
           let h6 = document.createElement('h6');
@@ -61,7 +51,7 @@ function getData() {
           // video.addEventListener('touchstart', playM)
           // video.addEventListener('mouseleave', pause);
           div.appendChild(video);
-          feed.innerHTML += videoTemplate;       
+          feed.appendChild(div)       
           if(i == 1){
           let observertarget = document.createElement('observertarget');
           observertarget.setAttribute('height','10px');

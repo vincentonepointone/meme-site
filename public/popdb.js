@@ -12,19 +12,33 @@ mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mong
 const db = mongoose.connection;
 db.once('open', () => {
 	console.log("Connected to MongoDB database..(memes)");
-});
-
+})
 fs.readdir(
   path.resolve(__dirname, 'memes'),
   (err, files) => {
     if (err) throw err;
-    
+  
     for (let file of files) {
-        const newFile = {
-          "fileName": file
+      var  ext = "";
+        if(file.includes('.mp4')){
+           ext = '.mp4'
+      
+        } else if(file.includes('.jpeg')){
+           ext = '.jpeg'
+      
+        } else if(file.includes('.webp')){
+           ext = '.webp'
+           
+        } else if(file.includes('.webm')){
+           ext = '.webm'
+      
         }
-      //  let ourjson = JSON.stringify(newFile)
-      //   console.log(ourjson)
+        const newFile = {
+          "fileName": file,
+          "ext": ext,
+        }
+        console.log(newFile)
+
         const newPost = new Post(newFile);
         async function updateMydb() {
         const savedPost =   await newPost.save();

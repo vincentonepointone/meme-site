@@ -13,3 +13,7 @@ body {
 .nav-icon {
     font-size: 100px;
 }
+
+.feed, .right-col, .left-col{
+    padding: 0;
+}

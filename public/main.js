@@ -39,5 +39,6 @@ uploadForm.addEventListener('submit', (e) => {
     caption.value = "";
     fileInput.vlaue = "";
     fileInput.files[0] = "";
+    getData();
     }
 })

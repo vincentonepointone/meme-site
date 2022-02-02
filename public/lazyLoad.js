@@ -47,7 +47,7 @@ function getData() {
              template = `
             <div>
               <h3>${caption}</h3>
-              <img src="${src}">
+              <img src="${src}" width="100%">
             </div> 
             `;   
           }

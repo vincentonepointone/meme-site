@@ -40,7 +40,7 @@ uploadForm.addEventListener('submit', (e) => {
     fileInput.vlaue = "";
     fileInput.files[0] = "";
     getData();
-    const myTimeout = setTimeout(myGreeting, 5000);
+    const myTimeout = setTimeout(myGreeting, 10000);
 
     function myGreeting() {
         getData();

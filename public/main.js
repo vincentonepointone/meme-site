@@ -2,11 +2,15 @@
 
 let uploadForm = document.getElementById('uploadForm');
 let modalWarning = document.getElementById('modalWarning');
+let fileInput = document.getElementById('fileInput');
+let fileVid = document.getElementById('fileVid');
+console.log(fileVid)
+fileImage.style.display = "none";
+fileVid.style.display = "none";
 uploadForm.addEventListener('submit', (e) => {
     e.preventDefault();
     modalWarning.innerText = "";
     let caption = document.getElementById('caption');
-    let fileInput = document.getElementById('fileInput');
     console.log(fileInput.files[0])
     console.log(caption.Prototype)
     if(!caption.value) {
@@ -49,3 +53,51 @@ uploadForm.addEventListener('submit', (e) => {
     }
    
 })
+
+// var showFileImage = function(event) {
+//    var fileImage = document.getElementById('fileImage');
+
+//    fileImage.src = URL.createObjectURL(event.target.files[0]);
+//    fileImage.classList.remove("d-none")   
+//    fileImage.onload = function() {
+//     URL.revokeObjectURL(output.src) // free memory
+//   }
+// }
+
+fileInput.onchange = evt => {
+    const [file] = fileInput.files
+    console.log(fileInput.files)
+
+    if (file) {
+        fileImage.src = window.URL.createObjectURL(file)
+        if(file.name.includes('.mp4')){
+            fileVid.src = window.URL.createObjectURL(file);
+            fileVid.style.display = "block";
+            fileImage.style.display = "none";
+            fileVid.onload = function() {
+                window.URL.revokeObjectURL(fileVid.src) // free memory
+              }
+         } else if(file.name.includes(".jpeg")){
+            fileImage.src = window.URL.createObjectURL(file);
+            fileImage.style.display = "block";
+            fileVid.style.display = "none";
+            fileImage.onload = function() {
+                window.URL.revokeObjectURL(fileImage.src) // free memory
+              }            
+         } else if(file.name.includes(".webp")){
+            fileImage.src = window.URL.createObjectURL(file)
+            fileImage.style.display = "block";
+            fileVid.style.display = "none";
+            fileImage.onload = function() {
+                window.URL.revokeObjectURL(fileImage.src) // free memory
+              }
+         } else if(file.name.includes(".webm")){
+            fileVid.src = window.URL.createObjectURL(file)
+            fileVid.style.display = "block";
+            fileImage.style.display = "none";
+            fileVid.onload = function() {
+                window.URL.revokeObjectURL(fileVid.src) // free memory
+              }
+         }
+    }
+  }

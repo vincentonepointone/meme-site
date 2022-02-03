@@ -52,7 +52,7 @@ app.post('/upload', (req,res) => {
 	var  ext = "";
 	if(fileName.includes('.mp4')){
 	   ext = '.mp4'
-  
+		
 	} else if(fileName.includes('.jpeg')){
 	   ext = '.jpeg'
   

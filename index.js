@@ -41,6 +41,7 @@ app.post('/upload', (req,res) => {
 	var caption = req.body.caption;
 	var fileName = file.name; 
 
+
 	file.mv('public/memes/'+fileName, (err) => {
 		if(err){
 			res.send(err)

@@ -1,32 +1,32 @@
 let increaseVolume = document.getElementById('increaseVolume');
 let decreaseVolume = document.getElementById('decreaseVolume');
 let videoControls = document.getElementById('videoControls');
-let toggled = false;
+let toggled = "mouseover";
 videoControls.addEventListener('click', () => {
-    if(toggled == false || null || undefined) {
+    if(toggled === "mouseover") {
         document.querySelectorAll('video').forEach((vid) => {
         vid.parentElement.children[0].style.display = "block"
         vid.removeAttribute('controls')   
         vid.addEventListener('mouseover', play);
         vid.addEventListener('mouseleave', pause);
-        toggled = true;
+        toggled = "click";
     })         
-    } else if(toggled == true){
+    } else if(toggled === "click"){
     document.querySelectorAll('video').forEach((vid) => {
-        // vid.setAttribute('controls','');
+
         vid.removeEventListener('mouseover', play);
         vid.removeEventListener('mouseleave', pause);
         toggled = "controls";        
 
     })     
-    } else if(toggled == "controls"){
+    } else if(toggled === "controls"){
         document.querySelectorAll('video').forEach((vid) => {
             vid.setAttribute('controls','');  
             vid.parentElement.children[0].style.display = "none"  
         })   
-        toggled = false;  
+        toggled = "mouseover";  
     }
-
+    console.log(toggled)
 })
 
 const videoPlayClick = () => {

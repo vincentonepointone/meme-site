@@ -11,8 +11,6 @@ uploadForm.addEventListener('submit', (e) => {
     e.preventDefault();
     modalWarning.innerText = "";
     let caption = document.getElementById('caption');
-    console.log(fileInput.files[0])
-    console.log(caption.Prototype)
     if(!caption.value) {
         modalWarning.innerText = "Please enter a caption.";
         modalWarning.className = "";

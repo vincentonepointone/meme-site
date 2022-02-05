@@ -2,8 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const fileupload = require('express-fileupload'); 
-const path = require('path');
-const fs = require('fs');
 const Post = require('./filesNameModel');
 
 // Create express app
@@ -15,6 +13,11 @@ mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mong
 	useUnifiedTopology: true
 });
 
+// mongoose.connect('mongodb://localhost', {
+// 	useNewUrlParser: true,
+// 	useUnifiedTopology: true
+// });
+
 app.use(express.static('public'))
 const db = mongoose.connection;
 
@@ -25,9 +28,6 @@ db.once('open', () => {
 // Middleware
 app.use(bodyParser.json());
 
-app.get('/hello', (req, res) => {
-	res.send("Hello, World!");
-});
 
 const FilenameRoute = require('./routes/Filenames');
 

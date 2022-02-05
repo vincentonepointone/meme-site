@@ -12,6 +12,9 @@ body {
 .bi {
     color: white;
 }
+.bi {
+    cursor: pointer;
+}
 .nav-icon {
     font-size: 10px;
 }

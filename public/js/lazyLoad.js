@@ -17,7 +17,7 @@ fetch(URL)
     if (entries[0].isIntersecting) {
       if(filenameCounter > 0){document.querySelector('observertarget').remove();} 
       for(let i = 0; i < 11; i++) {
-        if(filenameCounter === data.length){ console.log(true)}  
+        if(filenameCounter === data.length){ return}  
         let src = `/memes/${data[i].fileName}`;
         let ext = data[i].ext;
         let caption = data[i].caption || "";

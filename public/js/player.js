@@ -34,7 +34,6 @@ const videoPlayClick = () => {
         vid.addEventListener('click',(e) => {
             const playButton = e.target.parentElement.children[0];
             if (e.target.paused) {
-                console.log(e.target.parentElement.children[0])
                  playButton.style.display = 'none'
                 e.target.play()
             } else {
@@ -81,7 +80,6 @@ increaseVolume.addEventListener('click',() => {
     } else {
         count += 1;     
     }
-    console.log(volumeOptions[count])
     document.querySelectorAll('video').forEach((vid) => {
         vid.volume  = volumeOptions[count];
     })  

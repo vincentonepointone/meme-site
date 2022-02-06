@@ -22,7 +22,7 @@ passport.deserializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
     clientID: "616817101048-79o4vovsomkadlgnht1p5q7fscnvau4k.apps.googleusercontent.com",
     clientSecret: "iK2tvdWGPCsg4eoVjkNOYds1",
-    callbackURL: "http://localhost:3000/google/callback"
+    callbackURL: "http://memeitboyz.herokuapp.com/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     /*

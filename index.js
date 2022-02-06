@@ -13,15 +13,15 @@ const path = require('path')
 const app = express();
 
 // Database
-// mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
-// 	useNewUrlParser: true,
-// 	useUnifiedTopology: true
-// });
-
-mongoose.connect('mongodb://localhost', {
+mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 });
+
+// mongoose.connect('mongodb://localhost', {
+// 	useNewUrlParser: true,
+// 	useUnifiedTopology: true
+// });
 
 app.use(express.static('public'))
 const db = mongoose.connection;

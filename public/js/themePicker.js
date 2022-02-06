@@ -14,7 +14,7 @@ const themeColors = {
 }
 let themeNum = 0;
 const nav = document.querySelector('nav');
-const icons = document.querySelectorAll('.bi')
+const icons = document.querySelectorAll('.bi');
 document.getElementById('themePicker').addEventListener('click', () => {
     if(themeNum === 0){
         document.body.style.backgroundColor = themeColors.light.bg;

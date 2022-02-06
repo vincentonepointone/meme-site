@@ -16,9 +16,7 @@ body {
 .bi {
     cursor: pointer;
 }
-.nav-icon {
-    font-size: 10px;
-}
+
 
 .spacer {
     width: 100%;
@@ -31,6 +29,12 @@ body {
 nav {
     color: white;
 }
+p {
+    color: white;
+}
 
+#exampleModalLabel {
 
+    color: black;
+}
 

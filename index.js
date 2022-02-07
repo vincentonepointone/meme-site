@@ -40,12 +40,39 @@ app.use('/filenames', FilenameRoute);
 
 //File Uploads
 app.use(fileupload())
+app.put('/upVote', (req, res) => {
+	let id = req.body.id;
+	 var ids = mongoose.Types.ObjectId(id);
+	 async function updateMydb() {
+		 try{
+			const post = await Post.updateOne({ _id: ids}, { $inc: { "upvotes" : 1 } }) 
+			console.log(post)
+		 }catch(e){
+			console.log(e.message)
+		 }
+		      
+	}
+	updateMydb()
+})
 
+app.put('/downVote', (req, res) => {
+	let id = req.body.id;
+	 var ids = mongoose.Types.ObjectId(id);
+	 async function updateMydb() {
+		 try{
+			const post = await Post.updateOne({ _id: ids}, { $inc: { "downvotes" : -1 } }) 
+			console.log(post)
+		 }catch(e){
+			console.log(e.message)
+		 }
+		      
+	}
+	updateMydb()
+})
 app.post('/upload', (req,res) => {
 	var file = req.files.fileInput;
 	var caption = req.body.caption;
 	var fileName = file.name; 
-
 
 	file.mv('public/memes/'+fileName, (err) => {
 		if(err){
@@ -72,7 +99,9 @@ app.post('/upload', (req,res) => {
 	const newFile = {
 	  "fileName": fileName,
 	  "ext": ext,
-	  "caption": caption
+	  "caption": caption,
+	  'upvotes': 0,
+	  "downvotes": 0
 	}
 	
 

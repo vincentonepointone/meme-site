@@ -8,7 +8,7 @@ const cookieSession = require('cookie-session');
 require('./passport-setup');
 const cors = require('cors');
 const path = require('path');
-require('dotenv').config();
+// require('dotenv').config();
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
 
@@ -21,13 +21,8 @@ const s3 = new S3({
 	region,
 	accessKeyId,
 	secretAccesskey,
-	bucketName
 })
-const aws = require('aws-sdk');
-aws.config = new aws.Config();
-aws.config.accessKeyId = "AKIA4MQP2Q7N3N4CROHU";
-aws.config.secretAccessKey = "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";
-aws.config.region = "eu-west-1";
+
 // Create express app
 const app = express();
 

@@ -12,15 +12,16 @@ const path = require('path');
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
 
-const bucketName = "memeitboyz";
-const region = "eu-west-1";
-const accessKeyId = "Y3D26hQKe1uB3aqCCk79vz6L71FkZ8nGB5i7KYnq"
-const secretAccesskey = "AKIA4MQP2Q7N3N4CROHU"
+const bucketName = process.env.AWS_BUCKET_NAME;
+const region = process.env.AWS_BUCKET_REGION;
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+const secretAccesskey = process.env.AWS_ACCESS_KEY_SECRET;
 
 const s3 = new S3({
 	region,
 	accessKeyId,
-	secretAccesskey
+	secretAccesskey,
+	bucketName
 })
 // Create express app
 const app = express();

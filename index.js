@@ -12,7 +12,7 @@ const path = require('path');
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
 
-const bucketName = memeitboyz;
+const bucketName = "memeitboyz";
 const region = "eu-west-1";
 const accessKeyId = "Y3D26hQKe1uB3aqCCk79vz6L71FkZ8nGB5i7KYnq"
 const secretAccesskey = "AKIA4MQP2Q7N3N4CROHU"

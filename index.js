@@ -23,6 +23,11 @@ const s3 = new S3({
 	secretAccesskey,
 	bucketName
 })
+const aws = require('aws-sdk');
+aws.config = new aws.Config();
+aws.config.accessKeyId = "AKIA4MQP2Q7N3N4CROHU";
+aws.config.secretAccessKey = "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";
+aws.config.region = region;
 // Create express app
 const app = express();
 

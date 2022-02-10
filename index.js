@@ -8,7 +8,7 @@ const cookieSession = require('cookie-session');
 require('./passport-setup');
 const cors = require('cors');
 const path = require('path');
-// require('dotenv').config();
+require('dotenv').config();
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
 
@@ -16,6 +16,7 @@ const bucketName = process.env.AWS_BUCKET_NAME;
 const region = process.env.AWS_BUCKET_REGION;
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const secretAccesskey = process.env.AWS_ACCESS_KEY_SECRET;
+console.log("here====>",bucketname,region,accessKeyId,secretAccesskey)
 
 const s3 = new S3({
 	region,

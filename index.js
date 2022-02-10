@@ -7,23 +7,37 @@ const passport = require('passport');
 const cookieSession = require('cookie-session');
 require('./passport-setup');
 const cors = require('cors');
-const path = require('path')
+const path = require('path');
+require('dotenv').config();
+const S3 = require('aws-sdk/clients/s3');
+const fs = require('fs');
 
+const bucketName = process.env.AWS_BUCKET_NAME;
+const region = process.env.AWS_BUCKET_REGION;
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+const secretAccesskey = process.env.AWS_ACCESS_KEY_SECRET;
+
+const s3 = new S3({
+	region,
+	accessKeyId,
+	secretAccesskey
+})
 // Create express app
 const app = express();
 
 // Database
-mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
-	useNewUrlParser: true,
-	useUnifiedTopology: true
-});
-
-// mongoose.connect('mongodb://localhost', {
+// mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
 // 	useNewUrlParser: true,
 // 	useUnifiedTopology: true
 // });
 
+mongoose.connect('mongodb://localhost', {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+});
+
 app.use(express.static('public'))
+
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -46,6 +60,7 @@ app.put('/upVote', (req, res) => {
 	 async function updateMydb() {
 		 try{
 			const post = await Post.updateOne({ _id: ids}, { $inc: { "upvotes" : 1 } }) 
+			const del = await Post.deleteMany({ ext: ".webm" }) 
 			console.log(post)
 		 }catch(e){
 			console.log(e.message)
@@ -69,19 +84,36 @@ app.put('/downVote', (req, res) => {
 	}
 	updateMydb()
 })
-app.post('/upload', (req,res) => {
+
+async function bucket(filePath, fileName) {
+	const filepath = path.join(__dirname,'public','memes', fileName)
+	const fileStream = fs.createReadStream(filepath);
+
+	
+	const uploadParams = {
+		Bucket: bucketName,
+		Body: fileStream,
+		Key: fileName,
+	};
+ s3.upload(uploadParams)
+		.promise()
+		.then((data) => data.Location);
+}
+app.post('/upload', async (req,res) => {
 	var file = req.files.fileInput;
 	var caption = req.body.caption;
 	var fileName = file.name; 
-
-	file.mv('public/memes/'+fileName, (err) => {
-		if(err){
-			res.send(err)
+	var filePath =	'public/memes/'+fileName;
+	console.log(filePath)
+	await file.mv('public/memes/' + fileName, (err) => {
+		if (err) {
+			res.send(err);
 		} else {
-			res.send('file Uploaded')
+			console.log('fileUploaded')
 		}
-	})
 
+	});
+	await bucket(filePath, fileName)
 	var  ext = "";
 	if(fileName.includes('.mp4')){
 	   ext = '.mp4'
@@ -97,7 +129,7 @@ app.post('/upload', (req,res) => {
   
 	}
 	const newFile = {
-	  "fileName": fileName,
+	  "fileName": '/memes/' + fileName,
 	  "ext": ext,
 	  "caption": caption,
 	  'upvotes': 0,
@@ -112,7 +144,19 @@ app.post('/upload', (req,res) => {
 	}
 	updateMydb()
 })
-
+function getFileStream(fileKey) {
+	const params = {
+		Key: fileKey,
+		Bucket: bucketName
+	}
+	s3.getObject(params).createReadStream()
+}
+app.get('/memes/:key',(req, res) => {
+	console.log('pipeworking')
+	 const key = req.params.key;
+	 const readStream = getFileStream(key);
+	 readStream.pype(res)
+})
 // Google Auth------------------------------------------------
 app.use(cors())
 
@@ -141,9 +185,6 @@ const isLoggedIn = (req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Example protected and unprotected routes
-app.get('/', (req, res) => res.send('Example Home page!'))
-app.get('/failed', (req, res) => res.send('You Failed to log in!'))
 
 // In this route you can see that if the user is logged in u can acess his info in: req.user
 app.get('/good', isLoggedIn, (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')))

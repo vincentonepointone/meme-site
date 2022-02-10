@@ -26,7 +26,7 @@ videoControls.addEventListener('click', () => {
         })   
         toggled = "mouseover";  
     }
-    console.log(toggled)
+
 })
 
 const videoPlayClick = () => {
@@ -78,7 +78,7 @@ increaseVolume.addEventListener('click',() => {
     if(count == 10){
         count = 10
     } else {
-        count += 1;     
+        count += 2;     
     }
     document.querySelectorAll('video').forEach((vid) => {
         vid.volume  = volumeOptions[count];
@@ -89,7 +89,7 @@ decreaseVolume.addEventListener('click', () => {
     if(count == 0){
         count = 0
     } else {
-    count -= 1;     
+    count -= 2;     
     }
     document.querySelectorAll('video').forEach((vid) => {
         vid.volume  = volumeOptions[count];

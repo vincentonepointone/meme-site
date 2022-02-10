@@ -27,7 +27,7 @@ const aws = require('aws-sdk');
 aws.config = new aws.Config();
 aws.config.accessKeyId = "AKIA4MQP2Q7N3N4CROHU";
 aws.config.secretAccessKey = "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";
-aws.config.region = region;
+aws.config.region = "eu-west-1";
 // Create express app
 const app = express();
 

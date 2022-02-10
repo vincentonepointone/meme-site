@@ -145,17 +145,18 @@ app.post('/upload', async (req,res) => {
 	updateMydb()
 })
 function getFileStream(fileKey) {
+console.log(bucketName)
 	const params = {
 		Key: fileKey,
 		Bucket: bucketName
 	}
-	s3.getObject(params).createReadStream()
+	return s3.getObject(params).createReadStream()
 }
 app.get('/memes/:key',(req, res) => {
 	console.log('pipeworking')
 	 const key = req.params.key;
 	 const readStream = getFileStream(key);
-	 readStream.pype(res)
+	 readStream.pipe(res)
 })
 // Google Auth------------------------------------------------
 app.use(cors())

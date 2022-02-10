@@ -16,7 +16,7 @@ const bucketName = process.env.AWS_BUCKET_NAME;
 const region = process.env.AWS_BUCKET_REGION;
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const secretAccesskey = process.env.AWS_ACCESS_KEY_SECRET;
-console.log("here====>",bucketname,region,accessKeyId,secretAccesskey)
+console.log("here====>",bucketName,region,accessKeyId,secretAccesskey)
 
 const s3 = new S3({
 	region,

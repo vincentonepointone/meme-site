@@ -126,12 +126,8 @@ app.post('/upload', async (req,res) => {
 		}
 
 	});
-	try{
-		await bucket(fileName);
-	 }catch(e){
-		console.log(e.message)
-	 }
 
+		await bucket(fileName);
 	var  ext = "";
 	if(fileName.includes('.mp4')){
 	   ext = '.mp4'

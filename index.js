@@ -23,7 +23,7 @@ const s3 = new S3({
 	accessKeyId,
 	secretAccesskey,
 })
-
+s3.config.region = 'eu-west-1';
 // Create express app
 const app = express();
 

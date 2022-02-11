@@ -8,7 +8,7 @@ const cookieSession = require('cookie-session');
 require('./passport-setup');
 const cors = require('cors');
 const path = require('path');
-require('dotenv').config();
+// require('dotenv').config();
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
 
@@ -62,7 +62,6 @@ app.put('/upVote', (req, res) => {
 	 async function updateMydb() {
 		 try{
 			const post = await Post.updateOne({ _id: ids}, { $inc: { "upvotes" : 1 } }) 
-			const del = await Post.deleteMany({ ext: ".webm" }) 
 			console.log(post)
 		 }catch(e){
 			console.log(e.message)
@@ -87,7 +86,7 @@ app.put('/downVote', (req, res) => {
 	updateMydb()
 })
 
-async function bucket(filePath, fileName) {
+async function bucket(fileName) {
 	const filepath = path.join(__dirname,'public','memes', fileName)
 	const fileStream = fs.createReadStream(filepath);
 
@@ -115,7 +114,7 @@ app.post('/upload', async (req,res) => {
 		}
 
 	});
-	await bucket(filePath, fileName)
+	await bucket(fileName)
 	var  ext = "";
 	if(fileName.includes('.mp4')){
 	   ext = '.mp4'
@@ -147,19 +146,19 @@ app.post('/upload', async (req,res) => {
 	updateMydb()
 })
 function getFileStream(fileKey) {
-console.log(bucketName)
+console.log(fileKey)
 	const params = {
 		Key: fileKey,
 		Bucket: bucketName
 	}
 	return s3.getObject(params).createReadStream()
 }
-app.get('/memes/:key',(req, res) => {
-	console.log('pipeworking')
-	 const key = req.params.key;
-	 const readStream = getFileStream(key);
-	 readStream.pipe(res)
-})
+// app.get('/memes/:key',(req, res) => {
+// 	console.log('pipeworking')
+// 	 const key = req.params.key;
+// 	 const readStream = getFileStream(key);
+// 	 readStream.pipe(res)
+// })
 // Google Auth------------------------------------------------
 app.use(cors())
 

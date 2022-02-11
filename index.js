@@ -155,12 +155,12 @@ console.log(fileKey)
 	}
 	return s3.getObject(params).createReadStream()
 }
-// app.get('/memes/:key',(req, res) => {
-// 	console.log('pipeworking')
-// 	 const key = req.params.key;
-// 	 const readStream = getFileStream(key);
-// 	 readStream.pipe(res)
-// })
+app.get('/memes/:key',(req, res) => {
+	console.log('pipeworking')
+	 const key = req.params.key;
+	 const readStream = getFileStream(key);
+	 readStream.pipe(res)
+})
 // Google Auth------------------------------------------------
 app.use(cors())
 

@@ -98,9 +98,14 @@ async function bucket(fileName) {
 		Body: fileStream,
 		Key: fileName,
 	};
- s3.upload(uploadParams)
+	try{
+		s3.upload(uploadParams)
 		.promise()
 		.then((data) => data.Location);
+	 }catch(e){
+		console.log(e.message)
+	 }
+
 }
 app.post('/upload', async (req,res) => {
 	var file = req.files.fileInput;

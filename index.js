@@ -137,7 +137,7 @@ app.post('/upload', async (req,res) => {
   
 	}
 	const newFile = {
-	  "fileName": '/memes/' + fileName,
+	  "fileName": '/vids/' + fileName,
 	  "ext": ext,
 	  "caption": caption,
 	  'upvotes': 0,
@@ -160,7 +160,7 @@ console.log(fileKey)
 	}
 	return s3.getObject(params).createReadStream()
 }
-app.get('/memes/:key',(req, res) => {
+app.get('/vids/:key',(req, res) => {
 	console.log('pipeworking')
 	 const key = req.params.key;
 	 const readStream = getFileStream(key);

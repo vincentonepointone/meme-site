@@ -11,7 +11,8 @@ const path = require('path');
 // require('dotenv').config();
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
-
+const util = require('util');
+const unlinkFile = util.promisify(fs.unlink)
 const bucketName = process.env.AWS_BUCKET_NAME;
 const region = process.env.AWS_BUCKET_REGION;
 const accessKeyId = process.env.AWS_SECRET_KEY_ID;
@@ -101,7 +102,11 @@ async function bucket(fileName) {
 	try{
 		s3.upload(uploadParams)
 		.promise()
-		.then((data) => data.Location);
+		.then((data) =>{
+		data.Location	
+		console.log(data.key);
+		 unlinkFile(filepath)
+		} );
 	 }catch(e){
 		console.log(e.message)
 	 }
@@ -121,7 +126,7 @@ app.post('/upload', async (req,res) => {
 		}
 
 	});
-	await bucket(fileName)
+	await bucket(fileName);
 	var  ext = "";
 	if(fileName.includes('.mp4')){
 	   ext = '.mp4'

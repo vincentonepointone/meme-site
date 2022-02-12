@@ -89,7 +89,7 @@ app.put('/downVote', (req, res) => {
 	updateMydb()
 })
 
-async function bucket(fileName) {
+ function bucket(fileName) {
 	const filepath = path.join(__dirname,'public','memes', fileName)
 	const fileStream = fs.createReadStream(filepath);
 
@@ -99,18 +99,13 @@ async function bucket(fileName) {
 		Body: fileStream,
 		Key: fileName,
 	};
-	try{
+
 		s3.upload(uploadParams)
 		.promise()
 		.then((data) =>{
 		data.Location	
-		console.log(data.key);
 		//  unlinkFile(filepath)
-		} );
-	 }catch(e){
-		console.log(e.message)
-	 }
-
+		});
 }
 app.post('/upload', async (req,res) => {
 	var file = req.files.fileInput;
@@ -143,7 +138,7 @@ app.post('/upload', async (req,res) => {
   
 	}
 	const newFile = {
-	  "fileName": '/vids/' + fileName,
+	  "fileName": 'vids/' + fileName,
 	  "ext": ext,
 	  "caption": caption,
 	  'upvotes': 0,

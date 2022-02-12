@@ -105,7 +105,7 @@ async function bucket(fileName) {
 		.then((data) =>{
 		data.Location	
 		console.log(data.key);
-		 unlinkFile(filepath)
+		//  unlinkFile(filepath)
 		} );
 	 }catch(e){
 		console.log(e.message)

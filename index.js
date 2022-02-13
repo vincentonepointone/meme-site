@@ -24,9 +24,7 @@ const s3 = new S3({
 	secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
 	region:process.env.AWS_BUCKET_REGION,
 })
-// s3.config.region = region;
-// s3.config.accessKeyId = accessKeyId;
-// s3.config.secretAccessKey = secretAccesskey;
+
 // Create express app
 const app = express();
 
@@ -104,7 +102,7 @@ app.put('/downVote', (req, res) => {
 		.promise()
 		.then((data) =>{
 		data.Location	
-		//  unlinkFile(filepath)
+		 unlinkFile(filepath)
 		});
 }
 app.post('/upload', async (req,res) => {

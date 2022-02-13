@@ -20,13 +20,13 @@ const secretAccesskey = process.env.AWS_ACCESS_KEY_SECRET;
 console.log("here====>",bucketName,region,accessKeyId,secretAccesskey)
 
 const s3 = new S3({
-	region,
-	accessKeyId,
-	secretAccesskey,
+	accessKeyId: process.env.AWS_SECRET_KEY_ID,
+	secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
+	region:process.env.AWS_BUCKET_REGION,
 })
-s3.config.region = region;
-s3.config.accessKeyId = accessKeyId;
-s3.config.secretAccessKey = secretAccesskey;
+// s3.config.region = region;
+// s3.config.accessKeyId = accessKeyId;
+// s3.config.secretAccessKey = secretAccesskey;
 // Create express app
 const app = express();
 

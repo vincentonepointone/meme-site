@@ -41,6 +41,9 @@ mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mong
 
 app.use(express.static('.well-known'))
 app.use(express.static('public'))
+app.get('/.well-known/pki-validation/C2FA005756D735EF956EA5EF6DBD0719.txt', (req, res) => {
+	res.download('/.well-known/pki-validation/C2FA005756D735EF956EA5EF6DBD0719.txt')
+})
 const db = mongoose.connection;
 
 db.once('open', () => {

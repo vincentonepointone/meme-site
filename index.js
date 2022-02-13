@@ -39,8 +39,8 @@ mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mong
 // 	useUnifiedTopology: true
 // });
 
+app.use(express.static('.well-known'))
 app.use(express.static('public'))
-
 const db = mongoose.connection;
 
 db.once('open', () => {

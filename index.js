@@ -58,7 +58,7 @@ const FilenameRoute = require('./routes/Filenames');
 
 app.use('/filenames', FilenameRoute);
 
-//File Uploads
+
 app.use(fileupload())
 app.put('/upVote', (req, res) => {
 	let id = req.body.id;
@@ -118,7 +118,7 @@ app.post('/upload', async (req,res) => {
 		if (err) {
 			res.send(err);
 		} else {
-			res.redirect(req.get('referer'));
+			res.send('good')
 		}
 
 	});

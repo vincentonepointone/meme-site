@@ -8,7 +8,7 @@ const cookieSession = require('cookie-session');
 require('./passport-setup');
 const cors = require('cors');
 const path = require('path');
-// require('dotenv').config();
+require('dotenv').config();
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
 const util = require('util');
@@ -118,12 +118,12 @@ app.post('/upload', async (req,res) => {
 		if (err) {
 			res.send(err);
 		} else {
-			console.log('fileUploaded')
+			res.redirect(req.get('referer'));
 		}
 
 	});
 
-		bucket(fileName);
+	await	bucket(fileName);
 	var  ext = "";
 	if(fileName.includes('.mp4')){
 	   ext = '.mp4'

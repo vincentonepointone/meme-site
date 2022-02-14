@@ -4,7 +4,7 @@ let uploadForm = document.getElementById('uploadForm');
 let modalWarning = document.getElementById('modalWarning');
 let fileInput = document.getElementById('fileInput');
 let fileVid = document.getElementById('fileVid');
-
+const spinner = document.querySelector('.spinner-border');
 fileImage.style.display = "none";
 fileVid.style.display = "none";
 uploadForm.addEventListener('submit', (e) => {
@@ -24,29 +24,43 @@ uploadForm.addEventListener('submit', (e) => {
         modalWarning.classList.add('text-light');
        
     } else {
+    spinner.classList.remove('d-none')
     const endpoint = '/upload';
     const formData = new FormData();
 
     formData.append('fileInput', fileInput.files[0]);
     formData.append('caption', caption.value);
+    
     fetch(endpoint, {
         method: 'post',
         body: formData
-    }).catch(console.err)
+    })
+    .then(result => {
 
-    modalWarning.innerText = "Success! Your MEME is on here!";
-    modalWarning.className = "";
-    modalWarning.classList.add('bg-success');
-    modalWarning.classList.add('text-light');
-    caption.value = "";
-    fileInput.vlaue = "";
-    fileInput.files[0] = "";
+      spinner.classList.add('d-none')
+      modalWarning.innerText = "Success! Your MEME is on here!";
+      modalWarning.className = "";
+      modalWarning.classList.add('bg-success');
+      modalWarning.classList.add('text-light');
+      caption.value = "";
+      fileInput.vlaue = "";
+      fileInput.files[0] = "";
+    })
+    .catch(error => {
+        spinner.classList.add('d-none')
+      modalWarning.innerText = "Upload Failed";
+      modalWarning.className = "";
+      modalWarning.classList.add('bg-danger');
+      modalWarning.classList.add('text-light');
+      caption.value = "";
+      fileInput.vlaue = "";
+      fileInput.files[0] = "";
+    });
     }
 })
 
 fileInput.onchange = evt => {
     const [file] = fileInput.files
-    console.log(fileInput.files)
 
     if (file) {
         fileImage.src = window.URL.createObjectURL(file)

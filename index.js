@@ -8,7 +8,7 @@ const cookieSession = require('cookie-session');
 require('./passport-setup');
 const cors = require('cors');
 const path = require('path');
-require('dotenv').config();
+// require('dotenv').config();
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
 const util = require('util');
@@ -114,7 +114,7 @@ app.post('/upload', async (req,res) => {
 		if (err) {
 			res.send(err);
 		} else {
-			res.sendFile(path.join(__dirname, 'public', 'index.html'))
+			res.send('ok')
 		}
 
 	});

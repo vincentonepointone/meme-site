@@ -39,11 +39,8 @@ mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mong
 // 	useUnifiedTopology: true
 // });
 
-app.use(express.static('.well-known'))
 app.use(express.static('public'))
-app.get('/.well-known/pki-validation/C2FA005756D735EF956EA5EF6DBD0719.txt', (req, res) => {
-	res.download('/.well-known/pki-validation/C2FA005756D735EF956EA5EF6DBD0719.txt')
-})
+
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -62,45 +59,42 @@ app.use('/filenames', FilenameRoute);
 app.use(fileupload())
 app.put('/upVote', (req, res) => {
 	let id = req.body.id;
-	 var ids = mongoose.Types.ObjectId(id);
-	 async function updateMydb() {
-		 try{
+	var ids = mongoose.Types.ObjectId(id);
+	async function updateMydb() {
+		try{
 			const post = await Post.updateOne({ _id: ids}, { $inc: { "upvotes" : 1 } }) 
 			console.log(post)
-		 }catch(e){
+		}catch(e){
 			console.log(e.message)
-		 }
-		      
+		} 
 	}
 	updateMydb()
 })
 
 app.put('/downVote', (req, res) => {
 	let id = req.body.id;
-	 var ids = mongoose.Types.ObjectId(id);
-	 async function updateMydb() {
-		 try{
+	var ids = mongoose.Types.ObjectId(id);
+	async function updateMydb() {
+		try{
 			const post = await Post.updateOne({ _id: ids}, { $inc: { "downvotes" : -1 } }) 
 			console.log(post)
-		 }catch(e){
+		}catch(e){
 			console.log(e.message)
-		 }
-		      
+		}
+			
 	}
 	updateMydb()
 })
 
- function bucket(fileName) {
+
+function bucket(fileName) {
 	const filepath = path.join(__dirname,'public','memes', fileName)
 	const fileStream = fs.createReadStream(filepath);
-
-	
 	const uploadParams = {
 		Bucket: bucketName,
 		Body: fileStream,
 		Key: fileName,
 	};
-
 		s3.upload(uploadParams)
 		.promise()
 		.then((data) =>{
@@ -108,6 +102,8 @@ app.put('/downVote', (req, res) => {
 		 unlinkFile(filepath)
 		});
 }
+
+
 app.post('/upload', async (req,res) => {
 	var file = req.files.fileInput;
 	var caption = req.body.caption;
@@ -118,12 +114,12 @@ app.post('/upload', async (req,res) => {
 		if (err) {
 			res.send(err);
 		} else {
-			res.send('good')
+			res.sendFile(path.join(__dirname, 'public', 'index.html'))
 		}
 
 	});
 
-	bucket(fileName);
+	await bucket(fileName);
 	var  ext = "";
 	if(fileName.includes('.mp4')){
 	   ext = '.mp4'
@@ -148,26 +144,32 @@ app.post('/upload', async (req,res) => {
 	
 
 	const newPost = new Post(newFile);
+	
 	async function updateMydb() {
-	const savedPost =   await newPost.save();
-	console.log(savedPost)          
+		const savedPost =   await newPost.save();
+		console.log(savedPost)          
 	}
 	updateMydb()
 })
+
+
 function getFileStream(fileKey) {
-console.log(fileKey)
+	console.log(fileKey)
 	const params = {
 		Key: fileKey,
 		Bucket: bucketName
 	}
 	return s3.getObject(params).createReadStream()
 }
+
+
 app.get('/vids/:key',(req, res) => {
 	console.log('pipeworking')
 	 const key = req.params.key;
 	 const readStream = getFileStream(key);
 	 readStream.pipe(res)
 })
+
 // Google Auth------------------------------------------------
 app.use(cors())
 

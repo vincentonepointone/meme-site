@@ -87,8 +87,7 @@ app.put('/downVote', (req, res) => {
 })
 
 
-function bucket(fileName) {
-	const filepath = path.join(__dirname,'public','memes', fileName)
+function bucket(filePath) {
 	const fileStream = fs.createReadStream(filepath);
 	const uploadParams = {
 		Bucket: bucketName,
@@ -99,7 +98,7 @@ function bucket(fileName) {
 		.promise()
 		.then((data) =>{
 		data.Location	
-		 unlinkFile(filepath)
+		 unlinkFile(filePath)
 		});
 }
 
@@ -108,7 +107,7 @@ app.post('/upload', async (req,res) => {
 	var file = req.files.fileInput;
 	var caption = req.body.caption;
 	var fileName = file.name; 
-	var filePath =	'public/memes/'+fileName;
+	var filePath =	path.join(__dirname,'public','memes', fileName)
 	console.log(filePath)
 	await file.mv('public/memes/' + fileName, (err) => {
 		if (err) {
@@ -119,7 +118,7 @@ app.post('/upload', async (req,res) => {
 
 	});
 
-	bucket(fileName);
+	bucket(filePath);
 	var  ext = "";
 	if(fileName.includes('.mp4')){
 	   ext = '.mp4'

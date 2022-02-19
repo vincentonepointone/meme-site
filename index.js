@@ -112,9 +112,9 @@ app.post('/upload', async (req,res) => {
 	console.log(filePath)
 	await file.mv('public/memes/' + fileName, (err) => {
 		if (err) {
-			res.send(err);
+			console.log(err + '--In locall upload--');
 		} else {
-			res.send('ok')
+			console.log('uploaded to local folder')
 		}
 
 	});
@@ -149,7 +149,8 @@ app.post('/upload', async (req,res) => {
 		const savedPost =   await newPost.save();
 		console.log(savedPost)          
 	}
-	updateMydb()
+	updateMydb();
+	res.send('file uploaded on satday now vincent')
 })
 
 

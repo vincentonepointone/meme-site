@@ -45,6 +45,7 @@ uploadForm.addEventListener('submit', (e) => {
       caption.value = "";
       fileInput.vlaue = "";
       fileInput.files[0] = "";
+      console.log(result + "this is new on sat day")
     })
     .catch(error => {
         spinner.classList.add('d-none')

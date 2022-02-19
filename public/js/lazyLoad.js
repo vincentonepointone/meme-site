@@ -16,7 +16,7 @@ fetch(URL)
   function handleIntersect(entries) {
     if (entries[0].isIntersecting) {
       if(filenameCounter > 0){document.querySelector('observertarget').remove();} 
-      for(let i = 0; i < 11; i++) {
+      for(let i = 0; i < 6; i++) {
         if(filenameCounter === data.length){ return}  
         const src = `${data[i].fileName}`;
         const ext = data[i].ext;

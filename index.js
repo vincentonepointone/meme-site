@@ -87,8 +87,8 @@ app.put('/downVote', (req, res) => {
 })
 
 
-function bucket(filePath) {
-	const fileStream = fs.createReadStream(filepath);
+function bucket(filePath, fileName) {
+	const fileStream = fs.createReadStream(filePath);
 	const uploadParams = {
 		Bucket: bucketName,
 		Body: fileStream,
@@ -118,7 +118,7 @@ app.post('/upload', async (req,res) => {
 
 	});
 
-	bucket(filePath);
+	bucket(filePath, fileName);
 	var  ext = "";
 	if(fileName.includes('.mp4')){
 	   ext = '.mp4'

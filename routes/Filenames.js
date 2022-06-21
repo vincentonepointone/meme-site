@@ -5,7 +5,6 @@ const Filename = require('../models/Filenames');
 // Get all routes
 router.get('/', async (req, res) => {
 	const filenames = await Filename.find();
-
 	res.json(filenames);
 });
 

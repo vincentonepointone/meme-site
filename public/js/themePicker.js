@@ -111,14 +111,13 @@ function darkTheme() {
 
 if(localStorage.getItem('color-theme') === 'light'){
     lightTheme();
-    console.log('light theming')
 }else if(localStorage.getItem('color-theme') === "grey") {
     ytdarkTheme();
 } else if(localStorage.getItem('color-theme') === "dark") {
     darkTheme();       
 }
 
-console.log(typeof(parseInt(localStorage.getItem('color-theme'))))
+
 document.getElementById('themePicker').addEventListener('click', () => {
     
     clickedNum++;

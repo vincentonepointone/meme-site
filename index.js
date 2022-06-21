@@ -8,15 +8,18 @@ const cookieSession = require('cookie-session');
 require('./passport-setup');
 const cors = require('cors');
 const path = require('path');
-// require('dotenv').config();
+require('dotenv').config();
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs');
 const util = require('util');
+
+
 const unlinkFile = util.promisify(fs.unlink)
 const bucketName = process.env.AWS_BUCKET_NAME;
 const region = process.env.AWS_BUCKET_REGION;
 const accessKeyId = process.env.AWS_SECRET_KEY_ID;
 const secretAccesskey = process.env.AWS_ACCESS_KEY_SECRET;
+
 console.log("here====>",bucketName,region,accessKeyId,secretAccesskey)
 
 const s3 = new S3({
@@ -28,13 +31,16 @@ const s3 = new S3({
 // Create express app
 const app = express();
 
-// Database
+// Online Atlas Database
+
 mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 });
 
-// mongoose.connect('mongodb://localhost', {
+// Localhost Database
+
+// mongoose.connect('mongodb://localhost/memes', {
 // 	useNewUrlParser: true,
 // 	useUnifiedTopology: true
 // });
@@ -107,13 +113,12 @@ app.post('/upload', async (req,res) => {
 	var file = req.files.fileInput;
 	var caption = req.body.caption;
 	var fileName = file.name; 
-	var filePath =	path.join(__dirname,'public','memes', fileName)
-	console.log(filePath)
+	var filePath =	path.join(__dirname,'public','memes', fileName);
 	await file.mv('public/memes/' + fileName, (err) => {
 		if (err) {
 			console.log(err + '--In locall upload--');
 		} else {
-			console.log('uploaded to local folder')
+			console.log('uploaded to local folder');
 		}
 
 	});
@@ -145,11 +150,10 @@ app.post('/upload', async (req,res) => {
 	const newPost = new Post(newFile);
 	
 	async function updateMydb() {
-		const savedPost =   await newPost.save();
-		console.log(savedPost)          
+		const savedPost =   await newPost.save();        
 	}
 	updateMydb();
-	res.send('file uploaded on satday now vincent')
+	res.send('ok')
 })
 
 
@@ -164,11 +168,11 @@ function getFileStream(fileKey) {
 
 
 app.get('/vids/:key',(req, res) => {
-	console.log('pipeworking')
+	console.log(req.params.key)
 	 const key = req.params.key;
 	 const readStream = getFileStream(key);
-	 readStream.pipe(res)
-})
+     readStream.pipe(res);
+});
 
 // Google Auth------------------------------------------------
 app.use(cors())

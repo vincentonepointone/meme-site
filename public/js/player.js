@@ -32,6 +32,7 @@ videoControls.addEventListener('click', () => {
 const videoPlayClick = () => {
     document.querySelectorAll('video').forEach((vid) => {
         vid.addEventListener('click',(e) => {
+            console.alert('click')
             const playButton = e.target.parentElement.children[0];
             if (e.target.paused) {
                  playButton.style.display = 'none'

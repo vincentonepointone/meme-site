@@ -43,9 +43,13 @@ uploadForm.addEventListener('submit', (e) => {
       modalWarning.classList.add('bg-success');
       modalWarning.classList.add('text-light');
       caption.value = "";
-      fileInput.vlaue = "";
+      fileInput.vlaue = null;
       fileInput.files[0] = "";
       console.log(result + "this is new on sat day")
+      fileVid.style.display = "none";
+      fileImage.style.display = "none";
+      console.log(fileInput)
+
     })
     .catch(error => {
         spinner.classList.add('d-none')

@@ -1,10 +1,12 @@
 //Upload file
-
+ 
 let uploadForm = document.getElementById('uploadForm');
 let modalWarning = document.getElementById('modalWarning');
 let fileInput = document.getElementById('fileInput');
 let fileVid = document.getElementById('fileVid');
+let fileImage = document.getElementById('fileImage');
 const spinner = document.querySelector('.spinner-border');
+console.log(fileImage)
 fileImage.style.display = "none";
 fileVid.style.display = "none";
 uploadForm.addEventListener('submit', (e) => {
@@ -66,7 +68,6 @@ uploadForm.addEventListener('submit', (e) => {
 
 fileInput.onchange = evt => {
     const [file] = fileInput.files
-
     if (file) {
         fileImage.src = window.URL.createObjectURL(file)
         if(file.name.includes('.mp4')){
@@ -76,7 +77,7 @@ fileInput.onchange = evt => {
             fileVid.onload = function() {
                 window.URL.revokeObjectURL(fileVid.src) // free memory
               }
-         } else if(file.name.includes(".jpeg")){
+         } else if(file.name.includes(".jpg")){
             fileImage.src = window.URL.createObjectURL(file);
             fileImage.style.display = "block";
             fileVid.style.display = "none";

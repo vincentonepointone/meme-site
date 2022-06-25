@@ -41,14 +41,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
             const upvotes = element.upvotes;
             const downvotes = element.downvotes;
             let template;
+                  //Play button goes in parent video div
+                  // <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="70" height="70" class="bi bi-caret-right position-absolute top-50 start-50 translate-middle" id="play-button" viewBox="0 0 16 16">
+                  //     <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
+                  // </svg>
             if(ext === '.mp4' || ext === ".webm") {
                 template = `
                 <h4>${caption}</h4>
-                <div class="position-relative">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="70" height="70" class="bi bi-caret-right position-absolute top-50 start-50 translate-middle" id="play-button" viewBox="0 0 16 16">
-                      <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
-                  </svg>
-                  <video src="/${src}" alt="a meme" class="rounded" width="100%">
+                <div class="position-relative vidzo">
+                  <video src="/${src}" alt="a meme" class="rounded" width="100%" controls>
                     <source src="/${src}" type="video/mp4; codecs=&quot;av01.0.00M.08, opus&quot;">
                     <source src="/${src}" type="video/mp4">
                   </video>

@@ -34,10 +34,10 @@ const app = express();
 
 // Online Atlas Database
 
-// mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
-// 	useNewUrlParser: true,
-// 	useUnifiedTopology: true
-// });
+mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+});
 
 // Localhost Database
 

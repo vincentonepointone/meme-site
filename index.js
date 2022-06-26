@@ -40,7 +40,11 @@ mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mong
 });
 
 // Localhost Database
-./
+
+mongoose.connect('mongodb://localhost/memes', {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+});
 
 app.use(express.static('public'))
 

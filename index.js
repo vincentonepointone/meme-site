@@ -123,8 +123,11 @@ app.post('/upload', async (req,res) => {
 		}
 
 	});
+	async function updateMydb() {
+		await bucket(filePath, fileName);
+		const savedPost =   await newPost.save();        
+	}
 
-	bucket(filePath, fileName);
 	var  ext = "";
 	if(fileName.includes('.mp4')){
 	   ext = '.mp4'

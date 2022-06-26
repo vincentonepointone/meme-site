@@ -34,17 +34,17 @@ const app = express();
 
 // Online Atlas Database
 
-mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
-	useNewUrlParser: true,
-	useUnifiedTopology: true
-});
-
-// Localhost Database
-
-// mongoose.connect('mongodb://localhost/memes', {
+// mongoose.connect('mongodb+srv://vincentonepointone:ytrewq132@cluster0.g3er2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
 // 	useNewUrlParser: true,
 // 	useUnifiedTopology: true
 // });
+
+// Localhost Database
+
+mongoose.connect('mongodb://localhost/memes', {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+});
 
 app.use(express.static('public'))
 
@@ -221,6 +221,22 @@ app.get('/logout', (req, res) => {
     req.session = null;
     req.logout();
     res.redirect('/');
+})
+
+app.use((err, req, res, next) => {
+	if(err.status == 404){
+		console.error(err.status)
+		next();
+	}
+  })
+app.use((err, req, res, next)=> {
+	if(err){
+		console.error(err);
+
+	}else{
+		next(err)
+	}
+	next(err)
 })
 
 // Starting server

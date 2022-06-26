@@ -6,26 +6,26 @@ let fileInput = document.getElementById('fileInput');
 let fileVid = document.getElementById('fileVid');
 let fileImage = document.getElementById('fileImage');
 const spinner = document.querySelector('.spinner-border');
-console.log(fileImage)
 fileImage.style.display = "none";
 fileVid.style.display = "none";
 uploadForm.addEventListener('submit', (e) => {
     e.preventDefault();
     modalWarning.innerText = "";
     let caption = document.getElementById('caption');
+    console.log(!fileInput.files[0].type)
     if(!caption.value) {
         modalWarning.innerText = "Please enter a caption.";
         modalWarning.className = "";
         modalWarning.classList.add('bg-warning');
         modalWarning.classList.add('text-light');
       
-    }else if(!fileInput.files[0]) {
+    } else if(!fileInput.files[0]) {
         modalWarning.innerText = "Please Choose a file.";
         modalWarning.className = "";
         modalWarning.classList.add('bg-warning');
         modalWarning.classList.add('text-light');
        
-    } else {
+    }else {
     spinner.classList.remove('d-none')
     const endpoint = '/upload';
     const formData = new FormData();
@@ -68,36 +68,50 @@ uploadForm.addEventListener('submit', (e) => {
 
 fileInput.onchange = evt => {
     const [file] = fileInput.files
+    console.log(fileInput.files)
     if (file) {
-        fileImage.src = window.URL.createObjectURL(file)
-        if(file.name.includes('.mp4')){
+          if(file.name.includes('.mp4')){
             fileVid.src = window.URL.createObjectURL(file);
             fileVid.style.display = "block";
             fileImage.style.display = "none";
             fileVid.onload = function() {
-                window.URL.revokeObjectURL(fileVid.src) // free memory
+            window.URL.revokeObjectURL(fileVid.src) // free memory
               }
          } else if(file.name.includes(".jpg")){
             fileImage.src = window.URL.createObjectURL(file);
             fileImage.style.display = "block";
             fileVid.style.display = "none";
             fileImage.onload = function() {
-                window.URL.revokeObjectURL(fileImage.src) // free memory
+            window.URL.revokeObjectURL(fileImage.src) // free memory
               }            
          } else if(file.name.includes(".webp")){
             fileImage.src = window.URL.createObjectURL(file)
             fileImage.style.display = "block";
             fileVid.style.display = "none";
             fileImage.onload = function() {
-                window.URL.revokeObjectURL(fileImage.src) // free memory
+            window.URL.revokeObjectURL(fileImage.src) // free memory
               }
          } else if(file.name.includes(".webm")){
             fileVid.src = window.URL.createObjectURL(file)
             fileVid.style.display = "block";
             fileImage.style.display = "none";
             fileVid.onload = function() {
-                window.URL.revokeObjectURL(fileVid.src) // free memory
+            window.URL.revokeObjectURL(fileVid.src) // free memory
               }
-         }
+         } else if(file.name.includes(".png")){
+            fileImage.src = window.URL.createObjectURL(file)
+            fileImage.style.display = "block";
+            fileVid.style.display = "none";
+            fileImage.onload = function() {
+            window.URL.revokeObjectURL(fileImage.src) // free memory
+            } 
+       } else {
+        modalWarning.innerText = "Please choose a webp, mp4, jpeg, webm or png file!";
+        modalWarning.className = "";
+        modalWarning.classList.add('bg-warning');
+        modalWarning.classList.add('text-light');
+        fileImage.style.display = "none";
+        fileVid.style.display = "none";
+       }
     }
   }
